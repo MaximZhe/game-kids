@@ -10,6 +10,7 @@ html{
 }
 body{
     background: #000000;
+    height: 100vh;
 }
 nav,footer,header{
     display: block;
@@ -58,11 +59,23 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
 
 .container{
-    height: 100vh;
+    width: 100vw;
+    
     display:flex;
     flex-wrap: wrap;
     align-items:center;
     justify-content:center;
+    
+}
+#start{
+    height: 100vh;
+    &.up{
+        margin-top: -100vh;
+        transition: 0.7s ease;
+    }
+}
+#board{
+    height: 100vh;
 }
 .card{
     max-width: 220px;
@@ -116,7 +129,6 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     height: 100px;
     font-weight: 700;
     font-size: 30px;
-    position: absolute;
     color: #93ff9c;
     box-shadow: 0px 0px 15px 10px #FFFFFF;
     cursor: pointer;

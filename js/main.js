@@ -19,19 +19,20 @@ let imgsBottom = new Set([...imgsReverse]);
 let sumImgs = [...imgsTop,...imgsBottom];
 
 
-
-sumImgs.forEach((item) => {
-    const card = document.createElement("div");
-    card.classList.add("card","noactive");
-    let img = document.createElement("img");
-    img.src = item;
-    img.setAttribute("data-num",item.match(/\d/));
-    container.append(card);
-    card.append(img);
-});
+function createCard () {
+    sumImgs.forEach((item) => {
+        const card = document.createElement("div");
+        card.classList.add("card","noactive");
+        let img = document.createElement("img");
+        img.src = item;
+        img.setAttribute("data-num",item.match(/\d/));
+        container.append(card);
+        card.append(img);
+    });
+}
+createCard ();
 
 let hasFlippedCard = false;
-let lockCard = 2;
 let oneCard;
 let twoCard;
 let f = [];
@@ -81,7 +82,7 @@ function flipCard(e) {
         
     }
     f = [];
-    console.log(count);
+
     if(count === activeCard.length){
         finishGame();
     }
@@ -93,17 +94,16 @@ function flipCard(e) {
     finishMassege.innerHTML = "Ты победил!!!";
     container.append(finishMassege);
     finishMassege.addEventListener("click", () => {
-   
         while (container.firstChild) {
                 container.removeChild(container.firstChild);
             }
         });
+
  }
  
 
 
 container.addEventListener("click", flipCard);
-
 
 
 
