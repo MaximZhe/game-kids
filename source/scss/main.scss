@@ -58,7 +58,6 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
 
 .container{
-    width: 100vw;
     height: 100vh;
     display:flex;
     flex-wrap: wrap;
@@ -95,4 +94,30 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
             display: block;
         }
     }
+}
+.succeed{
+    transform: rotateY(0deg)!important;
+    background: #706e6e!important;
+    img{
+        display: block!important;
+    }
+    pointer-events: none;
+}
+.no-click{
+    pointer-events: none;
+}
+.massege{
+    border-radius:10px;
+    background:#d357e9;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 300px;
+    height: 100px;
+    font-weight: 700;
+    font-size: 30px;
+    position: absolute;
+    color: #93ff9c;
+    box-shadow: 0px 0px 15px 10px #FFFFFF;
+    cursor: pointer;
 }
