@@ -53,7 +53,6 @@ function flipCard(e) {
     if(e.target.classList.contains("noactive")){
         e.target.classList.add("active");  
     }
-    console.log(e.target)
     if (!hasFlippedCard && e.target.classList.contains("noactive")) {
         hasFlippedCard = true;
         oneCard = e.target;
@@ -81,13 +80,13 @@ function flipCard(e) {
         activeCards.forEach(i => {
             i.classList.remove("no-click");  
         });
-    },2000);
+    },1000);
     
     }else{
         activeCards.forEach(i => {
             setTimeout(() => {
             i.classList.remove("active", "no-click");
-            },2000);
+            },1000);
             
         });
         
@@ -129,7 +128,3 @@ function flipCard(e) {
 startGame();
 
 containers[1].addEventListener("click", flipCard);
-
-
-
-
