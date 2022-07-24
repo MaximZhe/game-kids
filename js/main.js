@@ -1,6 +1,7 @@
 "use strict"
 
-const container = document.querySelector(".container");
+const containers = document.querySelectorAll(".container");
+const start = document.querySelector(".start");
 const imgRandom = [
 "img/1.png", 
 "img/2.png",
@@ -17,8 +18,13 @@ let imgsTop = new Set([...imgRandom]);
 let imgsReverse = imgRandom.reverse();
 let imgsBottom = new Set([...imgsReverse]);
 let sumImgs = [...imgsTop,...imgsBottom];
-
-
+let activeCards = [];
+let hasFlippedCard = false;
+let activeCard;
+let oneCard;
+let twoCard;
+let f = [];
+let count = 0;
 function createCard () {
     sumImgs.forEach((item) => {
         const card = document.createElement("div");
@@ -26,54 +32,56 @@ function createCard () {
         let img = document.createElement("img");
         img.src = item;
         img.setAttribute("data-num",item.match(/\d/));
-        container.append(card);
+        containers[1].append(card);
         card.append(img);
     });
+    activeCard = document.querySelectorAll(".card");
+    activeCard.forEach(c => {
+        activeCards.push(c);
+    });
+    return activeCards;
+    
 }
-createCard ();
 
-let hasFlippedCard = false;
-let oneCard;
-let twoCard;
-let f = [];
-let activeCard = document.querySelectorAll(".card");
-let count = 0;
+
+
 function flipCard(e) {
     
     if(e.target.classList.contains("noactive")){
         e.target.classList.add("active");
     }
-    
-    if (!hasFlippedCard) {
+    console.log(e.target)
+    if (!hasFlippedCard && e.target.classList.contains("noactive")) {
         hasFlippedCard = true;
         oneCard = e.target;
         f.push(oneCard);
         return;
-
     }
-    if(hasFlippedCard){
+    if(hasFlippedCard && e.target.classList.contains("noactive")){
         twoCard = e.target;
         hasFlippedCard = false;
         f.push(twoCard);
     }
+    
     if(f.length === 2){
-        activeCard.forEach(i => {
+        activeCards.forEach(i => {
             i.classList.add("no-click");
         });
     }
+    f = [];
     
     if (oneCard.childNodes[0].dataset.num === twoCard.childNodes[0].dataset.num) {
     oneCard.classList.add("succeed");
     twoCard.classList.add("succeed");
     count += 2;
     setTimeout(() => {
-        activeCard.forEach(i => {
+        activeCards.forEach(i => {
             i.classList.remove("no-click");  
         });
     },2000);
     
     }else{
-        activeCard.forEach(i => {
+        activeCards.forEach(i => {
             setTimeout(() => {
             i.classList.remove("active", "no-click");
             },2000);
@@ -81,29 +89,44 @@ function flipCard(e) {
         });
         
     }
-    f = [];
 
-    if(count === activeCard.length){
+    if(count === activeCards.length){
         finishGame();
+        
     }
+    
  }
  
  function finishGame() {
    const finishMassege = document.createElement("div");
     finishMassege.classList.add("massege");
     finishMassege.innerHTML = "Ты победил!!!";
-    container.append(finishMassege);
+    containers[1].append(finishMassege);
     finishMassege.addEventListener("click", () => {
-        while (container.firstChild) {
-                container.removeChild(container.firstChild);
+        while (containers[1].firstChild) {
+                containers[1].removeChild(containers[1].firstChild);
             }
+            containers[0].classList.remove("up");
+            f = [];
+            count = 0;
+            activeCards = [];
+            finishMassege.remove();
         });
-
+       
  }
- 
 
+ function startGame() {
+    start.addEventListener("click", () => {
+            createCard ();
+            containers[0].classList.add("up");
+            count = 0;
+    });
+}
 
-container.addEventListener("click", flipCard);
+startGame();
+
+containers[1].addEventListener("click", flipCard);
+
 
 
 

@@ -13,6 +13,8 @@ html {
 body {
 		background: #000000;
 		height: 100vh;
+		overflow: hidden;
+		margin: 0;
 }
 
 nav, footer, header {
@@ -97,7 +99,7 @@ input:focus:-ms-input-placeholder {
 }
 
 .container {
-		width: 100vw;
+		height: 100vh;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -109,23 +111,36 @@ input:focus:-ms-input-placeholder {
 		-webkit-box-pack: center;
 		    -ms-flex-pack: center;
 		        justify-content: center;
+		-webkit-transition: margin 0.5s ease-in-out;
+		transition: margin 0.5s ease-in-out;
 }
-
-#start {
-		height: 100vh;
+.container .start {
+		border-radius: 10px;
+		background: #d357e9;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		width: 300px;
+		height: 100px;
+		font-weight: 700;
+		font-size: 30px;
+		color: #93ff9c;
+		-webkit-box-shadow: 0px 0px 15px 10px #FFFFFF;
+		        box-shadow: 0px 0px 15px 10px #FFFFFF;
+		cursor: pointer;
 }
-#start.up {
+.container.up {
 		margin-top: -100vh;
-		-webkit-transition: 0.7s ease;
-		transition: 0.7s ease;
-}
-
-#board {
-		height: 100vh;
 }
 
 .card {
-		max-width: 220px;
+		max-width: 200px;
 		width: 100%;
 		height: 200px;
 		border-radius: 20px;
@@ -198,4 +213,5 @@ input:focus:-ms-input-placeholder {
 		-webkit-box-shadow: 0px 0px 15px 10px #FFFFFF;
 		        box-shadow: 0px 0px 15px 10px #FFFFFF;
 		cursor: pointer;
+		position: absolute;
 }
