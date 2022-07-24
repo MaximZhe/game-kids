@@ -2,6 +2,7 @@
 
 const containers = document.querySelectorAll(".container");
 const start = document.querySelector(".start");
+const board = document.querySelector("#board");
 const imgRandom = [
 "img/1.png", 
 "img/2.png",
@@ -46,9 +47,11 @@ function createCard () {
 
 
 function flipCard(e) {
-    
+    if(!e.target.classList.contains("noactive") ){
+        return e.target; 
+    }
     if(e.target.classList.contains("noactive")){
-        e.target.classList.add("active");
+        e.target.classList.add("active");  
     }
     console.log(e.target)
     if (!hasFlippedCard && e.target.classList.contains("noactive")) {

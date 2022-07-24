@@ -99,6 +99,8 @@ input:focus:-ms-input-placeholder {
 }
 
 .container {
+		max-width: 1100px;
+		margin: 0 auto;
 		height: 100vh;
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -177,6 +179,14 @@ input:focus:-ms-input-placeholder {
 }
 .card.active img {
 		display: block;
+}
+.card:active {
+		-webkit-transform: scale(0.9);
+		        transform: scale(0.9);
+		-webkit-transition: -webkit-transform 0.2s;
+		transition: -webkit-transform 0.2s;
+		transition: transform 0.2s;
+		transition: transform 0.2s, -webkit-transform 0.2s;
 }
 
 .succeed {

@@ -61,6 +61,8 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
 
 .container{
+    max-width: 1100px;
+    margin:0 auto;
     height: 100vh;
     display:flex;
     flex-wrap: wrap;
@@ -118,6 +120,10 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
             display: block;
         }
     }
+    &:active{
+        transform: scale(0.9);
+        transition: transform .2s;
+    }
 }
 .succeed{
     transform: rotateY(0deg)!important;
@@ -144,4 +150,5 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     box-shadow: 0px 0px 15px 10px #FFFFFF;
     cursor: pointer;
     position: absolute;
+
 }
