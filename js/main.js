@@ -15,17 +15,20 @@ const imgRandom = [
 "img/4.png",
 "img/5.png"].sort(() => Math.random() - 0.5);
 
-let imgsTop = new Set([...imgRandom]);
+
+let imgsTop = new Set([...imgRandom]); // 5 верхних карточек
 let imgsReverse = imgRandom.reverse();
-let imgsBottom = new Set([...imgsReverse]);
-let sumImgs = [...imgsTop,...imgsBottom];
-let activeCards = [];
-let hasFlippedCard = false;
-let activeCard;
-let oneCard;
-let twoCard;
-let f = [];
-let count = 0;
+let imgsBottom = new Set([...imgsReverse]); // 5 нижних карточек
+let sumImgs = [...imgsTop,...imgsBottom]; // объеденяем в один массив
+let activeCards = []; // массив блоков карт
+let hasFlippedCard = false; 
+let activeCard; // Псевдомассив с картами
+let oneCard; // первая карта которую перевернули
+let twoCard;// вторая карта которую перевернули
+let f = []; // массив куда помещяются перевернутые карты
+let count = 0;// счетчик успешных совпадений карт
+
+// Создаем карты на доске
 function createCard () {
     sumImgs.forEach((item) => {
         const card = document.createElement("div");
@@ -45,14 +48,10 @@ function createCard () {
 }
 
 
-
+// Перевороачиваем карты и ищем совпадения
 function flipCard(e) {
-    if(!e.target.classList.contains("noactive") ){
-        return e.target; 
-    }
-    if(e.target.classList.contains("noactive")){
-        e.target.classList.add("active");  
-    }
+    changeActive(e.target);
+
     if (!hasFlippedCard && e.target.classList.contains("noactive")) {
         hasFlippedCard = true;
         oneCard = e.target;
@@ -73,32 +72,34 @@ function flipCard(e) {
     f = [];
     
     if (oneCard.childNodes[0].dataset.num === twoCard.childNodes[0].dataset.num) {
-    oneCard.classList.add("succeed");
-    twoCard.classList.add("succeed");
-    count += 2;
-    setTimeout(() => {
-        activeCards.forEach(i => {
-            i.classList.remove("no-click");  
-        });
-    },1000);
-    
+        oneCard.classList.add("succeed");
+        twoCard.classList.add("succeed");
+        count += 2;
+        setTimeout(() => {
+            activeCards.forEach(i => {
+                i.classList.remove("no-click");  
+            });
+        },1000);
     }else{
         activeCards.forEach(i => {
             setTimeout(() => {
             i.classList.remove("active", "no-click");
             },1000);
-            
-        });
-        
+        });   
     }
-
     if(count === activeCards.length){
-        finishGame();
-        
-    }
-    
+        finishGame(); 
+    } 
  }
- 
+ // переворачиваем карту
+ function changeActive (item) {
+    if(!item.classList.contains("noactive") ){
+        return item; 
+    }else{
+        item.classList.add("active");  
+    }
+ }
+// Выводим снопку для рестарта игры
  function finishGame() {
    const finishMassege = document.createElement("div");
     finishMassege.classList.add("massege");
@@ -109,22 +110,22 @@ function flipCard(e) {
                 containers[1].removeChild(containers[1].firstChild);
             }
             containers[0].classList.remove("up");
+            containers[1].classList.add("up");
             f = [];
             count = 0;
             activeCards = [];
-            finishMassege.remove();
-        });
-       
+            finishMassege.remove();   
+        });     
  }
-
+// Начало игры
  function startGame() {
     start.addEventListener("click", () => {
             createCard ();
             containers[0].classList.add("up");
-            count = 0;
+            containers[1].classList.remove("up");
+            count = 0;  
     });
 }
-
 startGame();
-
+//Обработчик на переворот карт
 containers[1].addEventListener("click", flipCard);
