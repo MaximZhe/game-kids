@@ -8,18 +8,27 @@ const imgRandom = [
 "img/2.png",
 "img/3.png",
 "img/4.png",
-"img/5.png",
-"img/1.png",
-"img/2.png",
-"img/3.png",
-"img/4.png",
-"img/5.png"].sort(() => Math.random() - 0.5);
+"img/5.png"];
+let imgsTop;
+let imgsReverse;
+let imgsBottom;
+let sumImgs;
 
 
-let imgsTop = new Set([...imgRandom]); // 5 верхних карточек
-let imgsReverse = imgRandom.reverse();
-let imgsBottom = new Set([...imgsReverse]); // 5 нижних карточек
-let sumImgs = [...imgsTop,...imgsBottom]; // объеденяем в один массив
+//Перемешиваем картинки для карт
+function ramdomImgCards (arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
+        //Деструктуризация массива (меняем местами img по индексу)
+        [arr[i], arr[j]] = [arr[j], arr[i]];  
+    }
+    return arr;
+}
+
+imgsTop = JSON.parse(JSON.stringify(ramdomImgCards(imgRandom))); // 5 верхних карточек
+imgsReverse = imgRandom.reverse();
+imgsBottom = JSON.parse(JSON.stringify(ramdomImgCards(imgsReverse))); // 5 нижних карточек
+sumImgs = [...imgsTop,...imgsBottom]; // объеденяем в один массив
 let activeCards = []; // массив блоков карт
 let hasFlippedCard = false; 
 let activeCard; // Псевдомассив с картами
@@ -28,6 +37,17 @@ let twoCard;// вторая карта которую перевернули
 let f = []; // массив куда помещяются перевернутые карты
 let count = 0;// счетчик успешных совпадений карт
 
+// Начало игры
+function startGame() {
+    start.addEventListener("click", () => {
+            ramdomImgCards (sumImgs);
+            createCard ();
+            containers[0].classList.add("up");
+            containers[1].classList.remove("up");
+            count = 0;
+    });
+}
+startGame();
 // Создаем карты на доске
 function createCard () {
     sumImgs.forEach((item) => {
@@ -40,14 +60,11 @@ function createCard () {
         card.append(img);
     });
     activeCard = document.querySelectorAll(".card");
-    activeCard.forEach(c => {
-        activeCards.push(c);
-    });
+    activeCards = [...activeCard];
+    console.log( activeCards);
     return activeCards;
     
 }
-
-
 // Перевороачиваем карты и ищем совпадения
 function flipCard(e) {
     changeActive(e.target);
@@ -103,7 +120,7 @@ function flipCard(e) {
  function finishGame() {
    const finishMassege = document.createElement("div");
     finishMassege.classList.add("massege");
-    finishMassege.innerHTML = "Ты победил!!!";
+    finishMassege.innerHTML = "Winner!!!";
     containers[1].append(finishMassege);
     finishMassege.addEventListener("click", () => {
         while (containers[1].firstChild) {
@@ -117,15 +134,6 @@ function flipCard(e) {
             finishMassege.remove();   
         });     
  }
-// Начало игры
- function startGame() {
-    start.addEventListener("click", () => {
-            createCard ();
-            containers[0].classList.add("up");
-            containers[1].classList.remove("up");
-            count = 0;  
-    });
-}
-startGame();
+
 //Обработчик на переворот карт
 containers[1].addEventListener("click", flipCard);
