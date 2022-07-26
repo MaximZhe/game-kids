@@ -112,8 +112,19 @@ input:focus:-ms-input-placeholder {
 		-webkit-box-pack: center;
 		    -ms-flex-pack: center;
 		        justify-content: center;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		    -ms-flex-direction: column;
+		        flex-direction: column;
+}
+.container .container__header {
+		font-size: 35px;
+		color: #FFFFFF;
+		font-weight: 700;
+		text-transform: uppercase;
 }
 .container .start {
+		margin-top: 50px;
 		border-radius: 10px;
 		background: #000000;
 		display: -webkit-box;

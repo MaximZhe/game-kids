@@ -68,8 +68,15 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     flex-wrap: wrap;
     align-items:center;
     justify-content:center;
-    
+    flex-direction: column;
+    .container__header{
+        font-size: 35px;
+        color: #FFFFFF;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
     .start{
+        margin-top: 50px;
         border-radius:10px;
         background:#000000;
         display: flex;

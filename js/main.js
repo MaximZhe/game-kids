@@ -43,6 +43,7 @@ function startGame() {
             ramdomImgCards (sumImgs);
             createCard ();
             containers[0].classList.add("up");
+            containers[1].style.flexDirection = "row";
             containers[1].classList.remove("up");
             count = 0;
     });
