@@ -24,14 +24,9 @@ function ramdomImgCards (arr) {
     }
     return arr;
 }
-
-imgsTop = JSON.parse(JSON.stringify(ramdomImgCards(imgRandom))); // 5 верхних карточек
-imgsReverse = imgRandom.reverse();
-imgsBottom = JSON.parse(JSON.stringify(ramdomImgCards(imgsReverse))); // 5 нижних карточек
-sumImgs = [...imgsTop,...imgsBottom]; // объеденяем в один массив
+sumImgs = [...imgRandom,...imgRandom.reverse()]; // объеденяем в один массив
 let activeCards = []; // массив блоков карт
-let hasFlippedCard = false; 
-let activeCard; // Псевдомассив с картами
+let hasFlippedCard = false;
 let oneCard; // первая карта которую перевернули
 let twoCard;// вторая карта которую перевернули
 let f = []; // массив куда помещяются перевернутые карты
@@ -60,13 +55,11 @@ function createCard () {
         containers[1].append(card);
         card.append(img);
     });
-    activeCard = document.querySelectorAll(".card");
-    activeCards = [...activeCard];
-    console.log( activeCards);
+    activeCards = document.querySelectorAll(".card");
     return activeCards;
     
 }
-// Перевороачиваем карты и ищем совпадения
+// Переворачиваем карты и ищем совпадения
 function flipCard(e) {
     changeActive(e.target);
 
