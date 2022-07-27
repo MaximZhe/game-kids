@@ -1,4 +1,3 @@
-"use strict"
 
 const containers = document.querySelectorAll(".container");
 const start = document.querySelector(".start");
@@ -9,9 +8,7 @@ const imgRandom = [
 "img/3.png",
 "img/4.png",
 "img/5.png"];
-let imgsTop;
-let imgsReverse;
-let imgsBottom;
+
 let sumImgs;
 
 
