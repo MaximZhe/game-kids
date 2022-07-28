@@ -100,7 +100,7 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     
     }
     .btns{
-        margin-top: 40px;
+        margin-top: 15px;
         width: 100%;
         max-width: 300px;
         background: #000000;
@@ -208,16 +208,8 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
     }
 }
 .level{
-    width: 250px;
-    height: 100px;
-    background: #206f7c;
-    border-radius: 10px;
-    position: absolute;
-    color:#000000;
-    box-shadow: 0px 0px 10px 10px #211b1a inset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-top: 40px;
+    color:#ffffff;
     font-size: 20px;
     text-align: center;
     font-weight: 500;

@@ -162,7 +162,7 @@ input:focus:-ms-input-placeholder {
 		        box-shadow: 0px 0px 10px 5px #FFFFFF;
 }
 .container .btns {
-		margin-top: 40px;
+		margin-top: 15px;
 		width: 100%;
 		max-width: 300px;
 		background: #000000;
@@ -304,23 +304,8 @@ input:focus:-ms-input-placeholder {
 }
 
 .level {
-		width: 250px;
-		height: 100px;
-		background: #206f7c;
-		border-radius: 10px;
-		position: absolute;
-		color: #000000;
-		-webkit-box-shadow: 0px 0px 10px 10px #211b1a inset;
-		        box-shadow: 0px 0px 10px 10px #211b1a inset;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-align: center;
-		    -ms-flex-align: center;
-		        align-items: center;
-		-webkit-box-pack: center;
-		    -ms-flex-pack: center;
-		        justify-content: center;
+		margin-top: 40px;
+		color: #ffffff;
 		font-size: 20px;
 		text-align: center;
 		font-weight: 500;
