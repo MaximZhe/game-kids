@@ -29,32 +29,17 @@ function levelHard(array) {
     sumImgs = [...array,...array.reverse()];
 }
 
-//Сообщение если уровень сложности не выбран
-function massegeChoiceLevel (){
-    const massegeLevel = document.createElement("div");
-    massegeLevel.classList.add("level");
-    massegeLevel.innerHTML ="Выберите уровень сложности";
-    containers[0].append(massegeLevel);
-}
-function massegeChoiceLevelHide(){
-    let mass = document.querySelector(".level");
-    mass.classList.remove("level");
-}
-
 //Кнопки выбора уровня сложности
 function choiceLevel () {
     btnsLevel.forEach(btn => {
         btn.addEventListener("click", (e) => {
             if(e.target && e.target.dataset.level === "1" ){
-                massegeChoiceLevelHide()
                 levelEasy();
                 board.style.maxWidth ="650px";
-            }else if(e.target && e.target.dataset.level === "2" ){
-                massegeChoiceLevelHide()
+            }else if(e.target && e.target.dataset.level === "2" ){              
                 levelNormal();
                 board.style.maxWidth ="850px";
             }else {
-                massegeChoiceLevelHide()
                 levelHard();
                 board.style.maxWidth ="960px";
             } 
@@ -82,9 +67,6 @@ let count = 0;// счетчик успешных совпадений карт
 // Начало игры
 function startGame() {
     start.addEventListener("click", () => {
-        if(sumImgs === undefined){
-            massegeChoiceLevel ();
-        }
             ramdomImgCards (sumImgs);
             createCard ();
             containers[0].classList.add("up");
