@@ -2,7 +2,8 @@
 const containers = document.querySelectorAll(".container");
 const start = document.querySelector(".start");
 const board = document.querySelector("#board");
-const imgRandom = [
+const btnsLevel = document.querySelectorAll(".btns");
+let imgs = [
 "img/1.png", 
 "img/2.png",
 "img/3.png",
@@ -10,8 +11,57 @@ const imgRandom = [
 "img/5.png"];
 
 let sumImgs;
+//Уровень 1
+function levelEasy(array){
+    array = JSON.parse(JSON.stringify(imgs));
+    sumImgs = [...array,...array.reverse()];
+}
+//Уровень 2
+function levelNormal(array) {
+    array = JSON.parse(JSON.stringify(imgs));
+    array = [...array, "img/6.png", "img/7.png"];
+    sumImgs = [...array,...array.reverse()];
+}
+//Уровень 3
+function levelHard(array) {
+    array = JSON.parse(JSON.stringify(imgs));
+    array = [...array, "img/6.png", "img/7.png", "img/8.png"];
+    sumImgs = [...array,...array.reverse()];
+}
 
+//Сообщение если уровень сложности не выбран
+function massegeChoiceLevel (){
+    const massegeLevel = document.createElement("div");
+    massegeLevel.classList.add("level");
+    massegeLevel.innerHTML ="Выберите уровень сложности";
+    containers[0].append(massegeLevel);
+}
+function massegeChoiceLevelHide(){
+    let mass = document.querySelector(".level");
+    mass.classList.remove("level");
+}
 
+//Кнопки выбора уровня сложности
+function choiceLevel () {
+    btnsLevel.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            if(e.target && e.target.dataset.level === "1" ){
+                massegeChoiceLevelHide()
+                levelEasy();
+                board.style.maxWidth ="650px";
+            }else if(e.target && e.target.dataset.level === "2" ){
+                massegeChoiceLevelHide()
+                levelNormal();
+                board.style.maxWidth ="850px";
+            }else {
+                massegeChoiceLevelHide()
+                levelHard();
+                board.style.maxWidth ="960px";
+            } 
+        });  
+    });
+}
+choiceLevel ();
 //Перемешиваем картинки для карт
 function ramdomImgCards (arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -21,7 +71,7 @@ function ramdomImgCards (arr) {
     }
     return arr;
 }
-sumImgs = [...imgRandom,...imgRandom.reverse()]; // объеденяем в один массив
+ // объеденяем в один массив
 let activeCards = []; // массив блоков карт
 let hasFlippedCard = false;
 let oneCard; // первая карта которую перевернули
@@ -32,6 +82,9 @@ let count = 0;// счетчик успешных совпадений карт
 // Начало игры
 function startGame() {
     start.addEventListener("click", () => {
+        if(sumImgs === undefined){
+            massegeChoiceLevel ();
+        }
             ramdomImgCards (sumImgs);
             createCard ();
             containers[0].classList.add("up");
@@ -78,7 +131,7 @@ function flipCard(e) {
         });
     }
     f = [];
-    
+    //Сравниваем значения data у img
     if (oneCard.childNodes[0].dataset.num === twoCard.childNodes[0].dataset.num) {
         oneCard.classList.add("succeed");
         twoCard.classList.add("succeed");
@@ -99,7 +152,7 @@ function flipCard(e) {
         finishGame(); 
     } 
  }
- // переворачиваем карту
+ // Переворачиваем карту
  function changeActive (item) {
     if(!item.classList.contains("noactive") ){
         return item; 
@@ -107,11 +160,11 @@ function flipCard(e) {
         item.classList.add("active");  
     }
  }
-// Выводим снопку для рестарта игры
+// Выводим кнопку для рестарта игры
  function finishGame() {
    const finishMassege = document.createElement("div");
     finishMassege.classList.add("massege");
-    finishMassege.innerHTML = "Winner!!!";
+    finishMassege.innerHTML = "Победа!!!";
     containers[1].append(finishMassege);
     finishMassege.addEventListener("click", () => {
         while (containers[1].firstChild) {
@@ -125,6 +178,8 @@ function flipCard(e) {
             finishMassege.remove();   
         });     
  }
+
+ 
 
 //Обработчик на переворот карт
 containers[1].addEventListener("click", flipCard);

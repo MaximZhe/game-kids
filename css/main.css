@@ -98,7 +98,7 @@ input:focus:-ms-input-placeholder {
 }
 
 .container {
-		max-width: 1010px;
+		max-width: 650px;
 		margin: 0 auto;
 		height: 100vh;
 		display: -webkit-box;
@@ -161,14 +161,45 @@ input:focus:-ms-input-placeholder {
 		-webkit-box-shadow: 0px 0px 10px 5px #FFFFFF;
 		        box-shadow: 0px 0px 10px 5px #FFFFFF;
 }
+.container .btns {
+		margin-top: 40px;
+		width: 100%;
+		max-width: 300px;
+		background: #000000;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+}
+.container .btns button {
+		color: #FFFFFF;
+		background: #000000;
+		font-size: 16px;
+		text-transform: uppercase;
+		border-radius: 20px;
+		padding: 5px;
+		border: 1px solid #FFFFFF;
+		-webkit-transition: 0.9s ease;
+		transition: 0.9s ease;
+}
+.container .btns button:hover {
+		color: #e13fc5;
+		background: #6e3003;
+		border: 1px solid #e13fc5;
+}
 .container.up {
 		display: none;
 }
 
 .card {
-		max-width: 150px;
+		max-width: 100px;
 		width: 100%;
-		height: 200px;
+		height: 150px;
 		border-radius: 20px;
 		margin: 10px;
 		display: -webkit-box;
@@ -270,6 +301,29 @@ input:focus:-ms-input-placeholder {
 .massege:active {
 		-webkit-transform: scale(0.95);
 		        transform: scale(0.95);
+}
+
+.level {
+		width: 250px;
+		height: 100px;
+		background: #206f7c;
+		border-radius: 10px;
+		position: absolute;
+		color: #000000;
+		-webkit-box-shadow: 0px 0px 10px 10px #211b1a inset;
+		        box-shadow: 0px 0px 10px 10px #211b1a inset;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		font-size: 20px;
+		text-align: center;
+		font-weight: 500;
 }
 
 /* Extra small: 0px (320px) - 576px */
