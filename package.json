@@ -1,0 +1,26 @@
+{
+  "name": "game-kids",
+  "version": "1.0.0",
+  "description": "Game",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximZhe/game-kids.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaximZhe/game-kids/issues"
+  },
+  "homepage": "https://github.com/MaximZhe/game-kids#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "json-server": "^0.17.0",
+    "mongodb": "^4.8.1"
+  }
+}
