@@ -284,7 +284,11 @@ function userForm (f) {
 userForm (form);
 */
 function getData () {
-    fetch("https://github.com/MaximZhe/game-kids/blob/master/users.json")
+    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json", {
+        headers: {
+            "Access-Control-Allow-Origin": "https://maximzhe.github.io"
+        },
+    })
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
