@@ -284,7 +284,7 @@ function userForm (f) {
 userForm (form);
 */
 function getData () {
-    fetch("https://maximzhe.github.io/game-kids/master/users.json")
+    fetch("https://github.com/MaximZhe/game-kids/blob/master/users.json")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
