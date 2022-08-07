@@ -265,7 +265,7 @@ function userForm (f) {
             obj[key] = value;
         });
 
-        postData("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json", JSON.stringify(obj))
+        postData("https://maximzhe.github.io/game-kids/master/users.json", JSON.stringify(obj))
         .then(data => {
             console.log(data);
         }).finally(() => {
@@ -284,7 +284,7 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json")
+    fetch("https://maximzhe.github.io/game-kids/master/users.json")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
