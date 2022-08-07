@@ -265,7 +265,7 @@ function userForm (f) {
             obj[key] = value;
         });
 
-        postData("http://localhost:3000/users", JSON.stringify(obj))
+        postData("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json/users", JSON.stringify(obj))
         .then(data => {
             console.log(data.name);
             console.log(users);
@@ -285,7 +285,7 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("http://localhost:3000/users")
+    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json/users")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
