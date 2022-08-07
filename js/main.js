@@ -248,7 +248,7 @@ const postData = async (url, data) => {  //делаем запрос не асс
         headers: {
             "Content-type": "application/json"
         },
-        body: data
+        body: JSON.stringify(data),
     });
     return await result.json();
 };
@@ -267,8 +267,7 @@ function userForm (f) {
 
         postData("https://raw.githubusercontent.com/MaximZhe/game-kids/master/users.json", JSON.stringify(obj))
         .then(data => {
-            console.log(data.name);
-            console.log(users);
+            console.log(data);
         }).finally(() => {
             f.reset();
             modalForm.classList.add("hide");
