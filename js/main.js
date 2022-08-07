@@ -240,7 +240,7 @@ function userForm (f) {
         })
     })
 }*/
-
+/*
 // Функция обработки запроса и возврата JSON файла
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
@@ -277,18 +277,18 @@ function userForm (f) {
                 btnCloseModal.style.display = "none";
             },400);
         });
-        getData ();
+        
         
     });
 }
 userForm (form);
-
+*/
 function getData () {
     fetch("https://maximzhe.github.io/game-kids/master/users.json")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
-        return users;
+        console.log(users);
     });
 }
 getData ();
