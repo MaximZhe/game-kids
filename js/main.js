@@ -284,7 +284,7 @@ function userForm (f) {
 userForm (form);
 */
 function getData () {
-    fetch("../users.json")
+    fetch("..game-kids/users.json")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
