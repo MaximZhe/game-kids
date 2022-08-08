@@ -245,10 +245,9 @@ function userForm (f) {
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
         method: "POST",
+        mode: 'cors',
+        credentials: 'include',
         headers: {
-            "Access-Control-Allow-Origin": "https://maximzhe.github.io",
-            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
             "Content-type": "application/json"
         },
         body: JSON.stringify(data),
