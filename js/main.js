@@ -265,7 +265,7 @@ function userForm (f) {
             obj[key] = value;
         });
 
-        postData("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json", obj)
+        postData("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?", obj)
         .then(data => {
             console.log(data);
         }).finally(() => {
