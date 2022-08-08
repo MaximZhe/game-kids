@@ -240,7 +240,7 @@ function userForm (f) {
         })
     })
 }*/
-/*
+
 // Функция обработки запроса и возврата JSON файла
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
@@ -265,7 +265,7 @@ function userForm (f) {
             obj[key] = value;
         });
 
-        postData("https://maximzhe.github.io/game-kids/master/users.json", JSON.stringify(obj))
+        postData("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?", JSON.stringify(obj))
         .then(data => {
             console.log(data);
         }).finally(() => {
@@ -282,7 +282,7 @@ function userForm (f) {
     });
 }
 userForm (form);
-*/
+
 function getData () {
     fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
     .then(response => response.json())
