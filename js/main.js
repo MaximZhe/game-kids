@@ -288,11 +288,11 @@ userForm (form);
 
 function getData () {
     fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
-    .then(response => response.json())
-    .then(json => users = json)
-    .then(() => {
-        console.log(users);
-    });
+    .then(response => console.log(response.headers.get('Content-Type')))
+    //.then(json => users = json)
+    //.then(() => {
+        //console.log(users);
+    //});
 }
 getData ();
 
