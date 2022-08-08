@@ -246,6 +246,9 @@ const postData = async (url, data) => {  //делаем запрос не асс
     const result = await fetch(url, {
         method: "POST",
         headers: {
+            "Access-Control-Allow-Origin": "https://maximzhe.github.io",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
             "Content-type": "application/json"
         },
         body: JSON.stringify(data),
