@@ -264,7 +264,7 @@ function userForm (f) {
         formData.forEach((value, key) => {
             obj[key] = value;
         });
-        postData("https://noiseless-quixotic-buckthornpepperberry.glitch.me/users", obj)
+        postData("https://noiseless-quixotic-buckthornpepperberry.glitch.me/posts", obj)
         .then(data => {
             console.log(data);
         }).finally(() => {
@@ -283,7 +283,7 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("https://noiseless-quixotic-buckthornpepperberry.glitch.me/users")
+    fetch("https://noiseless-quixotic-buckthornpepperberry.glitch.me/posts")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
