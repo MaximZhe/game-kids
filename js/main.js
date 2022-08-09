@@ -245,8 +245,6 @@ function userForm (f) {
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
         method: "POST",
-        mode: 'cors',
-        credentials: 'include',
         headers: {
             "Content-type": "application/json"
         },
@@ -266,8 +264,7 @@ function userForm (f) {
         formData.forEach((value, key) => {
             obj[key] = value;
         });
-        console.log(obj);
-        postData("https://raw.githubusercontent.com/MaximZhe/ga/me-kids/main/users", obj)
+        postData("https://noiseless-quixotic-buckthornpepperberry.glitch.me/users", obj)
         .then(data => {
             console.log(data);
         }).finally(() => {
@@ -286,7 +283,7 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
+    fetch("https://noiseless-quixotic-buckthornpepperberry.glitch.me/users")
     .then(response => response.json())
     .then(json => users = json)
     .then(() => {
