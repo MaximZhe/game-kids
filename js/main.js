@@ -9,6 +9,9 @@ const label = form.querySelector("label");
 const inputName = form.querySelector("input[name='name']");
 const btnCloseModal =document.querySelector(".modal__close");
 const btnOpenModal = document.querySelector("#login-form");
+let idUser = document.querySelector("#id-user").value;
+
+
 
 let imgs = [
 "img/1.png", 
@@ -241,6 +244,8 @@ function userForm (f) {
     })
 }*/
 
+let coutUsers;
+
 // Функция обработки запроса и возврата JSON файла
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
@@ -248,7 +253,7 @@ const postData = async (url, data) => {  //делаем запрос не асс
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data)
     });
     return await result.json();
 };
@@ -256,7 +261,7 @@ const postData = async (url, data) => {  //делаем запрос не асс
 function userForm (f) {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        
         const formData = new FormData (f);// Собираем значения с input
 
         const obj = {};
@@ -264,18 +269,24 @@ function userForm (f) {
         formData.forEach((value, key) => {
             obj[key] = value;
         });
-        postData("", obj)
-        .then(data => {
-            console.log(data);
+        obj.id = +idUser;
+        postData("ajax-form.php", obj )
+        .then(data => coutUsers = data)
+        .then(() =>{
+            return coutUsers;
         }).finally(() => {
             f.reset();
+            if(idUser === coutUsers.id){
+                idUser = coutUsers.id + 1;
+                return idUser;
+            }
             modalForm.classList.add("hide");
             setTimeout(() => {
                 form.classList.remove("active");
                 form.classList.add("hide");
                 btnCloseModal.style.display = "none";
             },400);
-        });
+        });console.log(obj)
         
         
     });
@@ -283,11 +294,12 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("")
+    fetch("https://star-boxs.ru/game/users.json")
     .then(response => response.json())
     .then(json => users = json)
+    .then(users => idUser = users.users.length)
     .then(() => {
-        console.log(users);
+        return idUser = +idUser + 1 ;
     });
 }
 getData ();
