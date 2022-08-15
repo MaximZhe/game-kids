@@ -299,7 +299,7 @@ function getData () {
     .then(json => users = json)
     .then(users => idUser = users.users.length)
     .then(() => {
-        return idUser = +idUser + 1 ;
+        return +idUser + 1 ;
     });
 }
 getData ();
