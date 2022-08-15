@@ -294,7 +294,7 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("https://star-boxs.ru/game/users.json")
+    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
     .then(response => response.json())
     .then(json => users = json)
     .then(users => idUser = users.users.length)
