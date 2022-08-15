@@ -285,7 +285,7 @@ function userForm (f) {
                 form.classList.add("hide");
                 btnCloseModal.style.display = "none";
             },400);
-        });console.log(obj)
+        });console.log(obj);
         
         
     });
@@ -298,7 +298,8 @@ function getData () {
     .then(json => users = json)
     .then(users => idUser = users.users.length)
     .then(() => {
-        return idUser = +idUser + 1 ;
+        idUser = +idUser + 1;
+        return idUser;
     });
 }
 getData ();
