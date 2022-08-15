@@ -270,7 +270,7 @@ function userForm (f) {
             obj[key] = value;
         });
         obj.id = +idUser;
-        postData("https://maximzhe.github.io/game-kids/ajax-form.php", obj )
+        postData("ajax-form.php", obj )
         .then(data => coutUsers = data)
         .then(() =>{
             return coutUsers;
