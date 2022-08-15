@@ -12,7 +12,7 @@ if (isset($_POST))
 }
 $id = (int)$id; // Преобразуем строку в число
 
-$contents = file_get_contents('https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?'); // Мы загрузили содержимое нашего файла.
+$contents = file_get_contents('users.json'); // Мы загрузили содержимое нашего файла.
 
 //Мы декодировали строку, это позволяет нам изменять данные.
 $contentsDecoded = json_decode($contents, true); 
@@ -31,7 +31,7 @@ $contentsDecoded['users'][] = $newContent;
 $json = json_encode($contentsDecoded);
 
 //Изменяем наш файл, заменив старое содержимое на новое и сохраняем файл в JSON.
-file_put_contents('https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?', $json);
+file_put_contents('users.json', $json);
 
 ?>
 

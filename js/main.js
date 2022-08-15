@@ -1,4 +1,3 @@
-
 const containers = document.querySelectorAll(".container");
 const start = document.querySelector(".start");
 const board = document.querySelector("#board");
@@ -294,12 +293,12 @@ function userForm (f) {
 userForm (form);
 
 function getData () {
-    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
+    fetch("https://star-boxs.ru/game/users.json")
     .then(response => response.json())
     .then(json => users = json)
     .then(users => idUser = users.users.length)
     .then(() => {
-        return +idUser + 1 ;
+        return idUser = +idUser + 1 ;
     });
 }
 getData ();
@@ -332,3 +331,4 @@ function modalOpen () {
     } );
 }
 modalOpen ();
+
