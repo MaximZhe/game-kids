@@ -278,7 +278,7 @@ function validateUsers(){
            form.append(info);
            setTimeout(() => {
                 info.remove();
-           },2000);
+           },1000);
         }
     }); 
 }
@@ -331,7 +331,6 @@ function getData () {
     
     .then((users) => {idUser = users.length;
                         userList = [...users];
-                        validateUsers();
                         retUse(userList);
                     })
     .then(() => {

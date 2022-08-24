@@ -1,4 +1,9 @@
 {
   "users": [
+    {
+      "name": "rammy",
+      "id": 1,
+      "lvl": null
+    }
   ]
 }
