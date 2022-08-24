@@ -135,6 +135,21 @@ input:-ms-input-placeholder {
 .container .container__login svg:hover path {
 		fill: #93ff9c;
 }
+.container .container__table {
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		top: 15vh;
+		right: 2px;
+		background: none;
+}
+.container .container__table svg:hover {
+		-webkit-transition: 0.5s ease;
+		transition: 0.5s ease;
+}
+.container .container__table svg:hover path {
+		fill: #93ff9c;
+}
 @-webkit-keyframes modalHide {
 		0% {
 				width: 100%;
@@ -396,6 +411,26 @@ input:-ms-input-placeholder {
 		-webkit-transition: 0.2s ease;
 		transition: 0.2s ease;
 }
+.container .modal .form .info {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		width: 200px;
+		height: 130px;
+		background: #ff0101;
+		text-align: center;
+		border-radius: 20px;
+		font-size: 20px;
+		color: #FFFFFF;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		position: absolute;
+		cursor: pointer;
+}
 .container .modal::before {
 		content: "";
 		width: 100%;
@@ -458,6 +493,45 @@ input:-ms-input-placeholder {
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
+}
+.container .modal .table {
+		background: #000000;
+		width: 70%;
+		padding: 20px 0;
+		z-index: 10;
+		position: absolute;
+		top: 15vh;
+		border-radius: 15px;
+		-webkit-box-shadow: 0px 0px 4px 3px #fff4f4 inset;
+		        box-shadow: 0px 0px 4px 3px #fff4f4 inset;
+}
+.container .modal .table li {
+		max-width: 320px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		color: #272def;
+		-webkit-box-pack: start;
+		    -ms-flex-pack: start;
+		        justify-content: flex-start;
+		font-size: 20px;
+		-webkit-box-align: baseline;
+		    -ms-flex-align: baseline;
+		        align-items: baseline;
+		margin-left: 40px;
+}
+.container .modal .table li span {
+		color: #93ff9c;
+		font-size: 20px;
+		margin: 0 5px;
+		margin-right: auto;
+		font-size: 30px;
+}
+.container .modal .table li span:nth-child(2) {
+		max-width: 15px;
+		width: 100%;
+		margin-right: 5px;
+		text-align: center;
 }
 .container .container__header {
 		font-size: 35px;
@@ -541,6 +615,9 @@ input:-ms-input-placeholder {
 		color: #e13fc5;
 		background: #6e3003;
 		border: 1px solid #e13fc5;
+}
+.container .btns button.active {
+		border: 1px solid #e13f3f;
 }
 .container.up {
 		display: none;
@@ -665,6 +742,9 @@ input:-ms-input-placeholder {
 @media (max-width: 575px) {
 		.container .container__header {
 				font-size: 30px;
+		}
+		.container .container__table {
+				top: 17vh;
 		}
 
 		.card {

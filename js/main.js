@@ -2,15 +2,18 @@ const containers = document.querySelectorAll(".container");
 const start = document.querySelector(".start");
 const board = document.querySelector("#board");
 const btnsLevel = document.querySelectorAll(".btns");
+const btnsLevelCopy = document.querySelectorAll(`[data-level]`);
 const modalForm = document.querySelector("#modal-form");
 const form = document.querySelector("#form-main");
+const btnSub = document.querySelector("#sub");
 const label = form.querySelector("label");
 const inputName = form.querySelector("input[name='name']");
 const btnCloseModal =document.querySelector(".modal__close");
 const btnOpenModal = document.querySelector("#login-form");
+const modalTable = document.querySelector("#modal-table");
+const btnCloseTable = modalTable.querySelector(".modal__close");
+const btnOpenTable = document.querySelector("#table-users");
 let idUser = document.querySelector("#id-user").value;
-
-
 
 let imgs = [
 "img/1.png", 
@@ -38,17 +41,38 @@ function levelHard(array) {
     sumImgs = [...array,...array.reverse()];
 }
 
+
+//Присваиваем класс кнопке если выбрали уровень
+function levelActive(btn){
+    btn.classList.add("active");
+}
+//Убираем активный класс у кнопки уровня
+function levelNoActive(btn){
+    btn.classList.remove("active");
+}
+//Перебор массива для кнопок data-level
+function levelButton (arr){
+    arr.forEach( item => {
+        levelNoActive(item);
+    });
+}
 //Кнопки выбора уровня сложности
 function choiceLevel () {
     btnsLevel.forEach(btn => {
         btn.addEventListener("click", (e) => {
+            let level;
+            levelButton (btnsLevelCopy);
+            levelActive(e.target);
             if(e.target && e.target.dataset.level === "1" ){
+                returnLevelGame (level, e.target.dataset.level);
                 levelEasy();
                 board.style.maxWidth ="650px";
-            }else if(e.target && e.target.dataset.level === "2" ){              
+            }else if(e.target && e.target.dataset.level === "2" ){
+                returnLevelGame (level, e.target.dataset.level);
                 levelNormal();
                 board.style.maxWidth ="850px";
             }else {
+                returnLevelGame (level, e.target.dataset.level);
                 levelHard();
                 board.style.maxWidth ="960px";
             } 
@@ -56,6 +80,14 @@ function choiceLevel () {
     });
 }
 choiceLevel ();
+
+//Передаем в таблицу игроков уровень сложности
+function returnLevelGame (num, button){
+    num = button;
+    lvl = num;
+    return lvl;
+}
+let lvl;
 //Перемешиваем картинки для карт
 function ramdomImgCards (arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -70,8 +102,7 @@ let hasFlippedCard = false;
 let oneCard; // первая карта которую перевернули
 let twoCard;// вторая карта которую перевернули
 let f = []; // массив куда помещяются перевернутые карты
-let g = [];
-let count = 0;// счетчик успешных совпадений карт
+let g = []; // массив куда добавляются совпавшие карты
 
 // Начало игры
 function startGame() {
@@ -82,6 +113,7 @@ function startGame() {
             containers[1].style.flexDirection = "row";
             containers[1].classList.remove("up");
             g = [];
+            levelButton (btnsLevelCopy);
     });
 }
 startGame();
@@ -213,38 +245,8 @@ function labelActive () {
 }
 labelActive ();
 
-let users;
-
-/*
-function userForm (f) {
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const r = new XMLHttpRequest ();
-        r.open("POST", "ajax-form.php");
-        r.setRequestHeader("Content-type", "application/json")
-        const formData = new FormData (f);
-
-        const obj = {};
-
-        formData.forEach((value, key) => {
-            obj[key] = value;
-        });
-
-        const json = JSON.stringify(obj);
-
-        r.send(json);
-
-        r.addEventListener("load", () => {
-            if(r.status === 200){
-                console.log(obj)
-            }
-        })
-    })
-}*/
-
-let coutUsers;
-
+let coutUsers; //Переменная для объекта который возвращается при удачном POST
+let userList; // Переменная для вывода и обновления списка игроков в таблице
 // Функция обработки запроса и возврата JSON файла
 const postData = async (url, data) => {  //делаем запрос не ассинхронным
     const result = await fetch(url, {
@@ -256,11 +258,35 @@ const postData = async (url, data) => {  //делаем запрос не асс
     });
     return await result.json();
 };
+
+//Присваиваем знаение инпута для проверки имени
+let valueInputName;
+inputName.addEventListener("input", () => {
+        valueInputName = inputName.value;
+        return valueInputName;
+    });
+//Сверяем имена из файла с введенным.
+btnSub.addEventListener("mouseover", () => {
+    validateUsers();
+});
+function validateUsers(){
+    userList.forEach( use => {
+        if(valueInputName === use.name){
+           const info = document.createElement("div");
+           info.classList.add("info");
+           info.innerHTML = `${valueInputName} уже используется, введите другое имя`;
+           form.append(info);
+           setTimeout(() => {
+                info.remove();
+           },2000);
+        }
+    }); 
+}
+
 //Отправляем данные с формы в JSON файл
 function userForm (f) {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        
         const formData = new FormData (f);// Собираем значения с input
 
         const obj = {};
@@ -269,9 +295,13 @@ function userForm (f) {
             obj[key] = value;
         });
         obj.id = +idUser;
-        postData("ajax-form.php", obj )
+        obj.lvl = +lvl;
+        postData("http://localhost:3000/users", obj )
         .then(data => coutUsers = data)
         .then(() =>{
+            userList.push(obj);
+            retUse(userList);
+            
             return coutUsers;
         }).finally(() => {
             f.reset();
@@ -279,33 +309,44 @@ function userForm (f) {
                 idUser = coutUsers.id + 1;
                 return idUser;
             }
+            modalForm.classList.remove("active");
             modalForm.classList.add("hide");
             setTimeout(() => {
                 form.classList.remove("active");
                 form.classList.add("hide");
                 btnCloseModal.style.display = "none";
             },400);
-        });console.log(obj);
-        
-        
+        });
+        console.log(obj);
     });
 }
 userForm (form);
 
+let users;
+//Делаем запрос к json файлу
 function getData () {
-    fetch("https://star-boxs.ru/game/users.json")
+    fetch("http://localhost:3000/users")
     .then(response => response.json())
     .then(json => users = json)
-    .then(users => idUser = users.users.length)
+    
+    .then((users) => {idUser = users.length;
+                        userList = [...users];
+                        validateUsers();
+                        retUse(userList);
+                    })
     .then(() => {
         idUser = +idUser + 1;
         return idUser;
     });
+    
 }
-getData ();
-
-//Закрваем Модальное окно
-
+ getData ();
+ 
+ //Возвращаем массив с пользователями users
+ function retUse(use){
+    return use;
+}
+//Закрваем Модальное окно с формой
 function modalClose () {
     btnCloseModal.addEventListener("click", () => {
         modalForm.classList.add("hide");
@@ -333,3 +374,37 @@ function modalOpen () {
 }
 modalOpen ();
 
+
+//Создаем список игроков
+let ul;
+function splitUsers( arr){
+    const list = document.createElement("ul");
+    arr.forEach(item => {
+        const itemUser = document.createElement("li");
+        list.classList.add("table");
+        itemUser.innerHTML = `Name :<span>${item.name} </span> level:<span> ${item.lvl}</span> `;
+        list.append(itemUser);
+        modalTable.append(list); 
+    });
+    ul = list;
+    return ul;
+}
+//Открываем таблицу с игроками
+function openTable () {
+    btnOpenTable.addEventListener("click", () => {
+        modalTable.classList.remove("hide");
+        modalTable.classList.add("active");
+        btnCloseTable.style.display = "flex";
+        splitUsers(userList);
+    });
+}
+openTable ();
+//Закрываем таблицу с игроками
+function closeTable () {
+    btnCloseTable.addEventListener("click", () => {
+        modalTable.classList.add("hide");
+        btnCloseTable.style.display = "none";
+        ul.remove();
+    });
+}
+closeTable ();
