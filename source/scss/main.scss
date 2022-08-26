@@ -307,6 +307,8 @@ input:-ms-input-placeholder      {color: #000000;}
         }
         .table{
             background: #000000;
+            overflow:auto;
+            height: 300px;
             width: 70%;
             padding: 20px 0;
             z-index: 10;
@@ -335,6 +337,10 @@ input:-ms-input-placeholder      {color: #000000;}
                     text-align: center;
                     
                 }
+            }
+            &::-webkit-scrollbar { /* webkit */
+                width: 0;
+                height: 0;
             }
         }
     }

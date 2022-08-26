@@ -69,7 +69,7 @@ function choiceLevel () {
                 board.style.maxWidth ="650px";
             }else if(e.target && e.target.dataset.level === "2" ){
                 returnLevelGame (level, e.target.dataset.level);
-                levelNormal();
+                levelNormal();    
                 board.style.maxWidth ="850px";
             }else {
                 returnLevelGame (level, e.target.dataset.level);
@@ -87,7 +87,7 @@ function returnLevelGame (num, button){
     lvl = num;
     return lvl;
 }
-let lvl;
+let lvl = 0;
 //Перемешиваем картинки для карт
 function ramdomImgCards (arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -122,9 +122,10 @@ function createCard () {
     sumImgs.forEach((item) => {
         const card = document.createElement("div");
         card.classList.add("card","noactive");
+        card.setAttribute("data-card", "false");
         let img = document.createElement("img");
         img.src = item;
-        img.setAttribute("data-num",item.match(/\d/));
+        img.setAttribute("data-number",item.match(/\d/));
         containers[1].append(card);
         card.append(img);
     });
@@ -136,32 +137,32 @@ function createCard () {
 function flipCard(e) {
     changeActive(e.target);
     console.log(e.target);
-    if (!hasFlippedCard && e.target.classList.contains("noactive")) {
+    if (!hasFlippedCard && e.target.hasAttribute("data-card")) {
         hasFlippedCard = true;
         oneCard = e.target;
         f.push(oneCard);
         return;
     }
-    if(hasFlippedCard && e.target.classList.contains("noactive")){
+    if(hasFlippedCard && e.target.hasAttribute("data-card")){
         twoCard = e.target;
         hasFlippedCard = false;
         f.push(twoCard);
     }
-    console.log(oneCard === oneCard);
     if(f.length === 2){
         activeCards.forEach(i => {
             i.classList.add("no-click");
         });
     }
     f = [];
+    
     //Сравниваем значения data у img
-    if (oneCard.childNodes[0].dataset.num === twoCard.childNodes[0].dataset.num && oneCard != twoCard) {
+    if (oneCard.childNodes[0].dataset.number === twoCard.childNodes[0].dataset.number && oneCard != twoCard) {
         oneCard.classList.add("succeed");
         twoCard.classList.add("succeed");
         if(oneCard.classList.contains("succeed") === twoCard.classList.contains("succeed")){
-           g.push(oneCard,twoCard); 
-        }
-        
+           g.push(oneCard,twoCard);
+           c (g);
+        }       
         setTimeout(() => {
             activeCards.forEach(i => {
                 i.classList.remove("no-click");  
@@ -174,18 +175,31 @@ function flipCard(e) {
         activeCards.forEach(i => {
             i.classList.remove("active", "no-click");
         });
+        return oneCard,twoCard;
 
     }else{
         activeCards.forEach(i => {
-            setTimeout(() => {
-            i.classList.remove("active", "no-click");
-            },1000);
+            if(!i.classList.contains("succeed") || oneCard != twoCard || i.childNodes[0].dataset.number === undefined){
+                setTimeout(() => {
+                    i.classList.remove("active", "no-click");
+                },800);
+            }
+            
         }); 
     }
-    if(g.length === activeCards.length){
+    if(res.size === (activeCards.length / 2)){
         finishGame(); 
-    } 
+    }
+    
+    
  }
+ let res = new Set (); // массив значений data-number совпавших карт
+ //функция перебора и добавления экслюзивных значений в массив
+ function c (arr) {
+    arr.forEach(item => {
+        res.add(item.childNodes[0].dataset.number);
+    });
+    }
  // Переворачиваем карту
  function changeActive (item) {
     if(!item.classList.contains("noactive") ){
@@ -282,7 +296,16 @@ function validateUsers(){
         }
     }); 
 }
-
+//Сообщение об удачной отправки 
+function massSucces () {
+    const mass = document.createElement("div");
+    mass.classList.add("info");
+    mass.innerHTML = "Данные успешно отправлены";
+    form.append(mass);
+    setTimeout(() => {
+        mass.remove();
+    },1000);
+}
 //Отправляем данные с формы в JSON файл
 function userForm (f) {
     form.addEventListener("submit", (e) => {
@@ -290,7 +313,7 @@ function userForm (f) {
         const formData = new FormData (f);// Собираем значения с input
 
         const obj = {};
-
+        
         formData.forEach((value, key) => {
             obj[key] = value;
         });
@@ -301,22 +324,23 @@ function userForm (f) {
         .then(() =>{
             userList.push(obj);
             retUse(userList);
-            
+            massSucces ();
             return coutUsers;
         }).finally(() => {
             f.reset();
+            valueInputName = " ";
             if(idUser === coutUsers.id){
                 idUser = coutUsers.id + 1;
                 return idUser;
             }
+        });
+        setTimeout(() => {
             modalForm.classList.remove("active");
             modalForm.classList.add("hide");
-            setTimeout(() => {
-                form.classList.remove("active");
-                form.classList.add("hide");
-                btnCloseModal.style.display = "none";
-            },400);
-        });
+            form.classList.remove("active");
+            form.classList.add("hide");
+            btnCloseModal.style.display = "none";
+        },1500);
         console.log(obj);
     });
 }
@@ -360,8 +384,8 @@ function modalClose () {
 modalClose ();
 
 //Открываем форму для ввода имени
-function modalOpen () {
-    btnOpenModal.addEventListener("click", () => {
+function modalOpen (btnOpen) {
+    btnOpen.addEventListener("click", () => {
         modalForm.classList.remove("hide");
         modalForm.classList.add("active");
         setTimeout(() => {
@@ -371,7 +395,7 @@ function modalOpen () {
         },400);
     } );
 }
-modalOpen ();
+modalOpen (btnOpenModal);
 
 
 //Создаем список игроков

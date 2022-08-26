@@ -496,6 +496,8 @@ input:-ms-input-placeholder {
 }
 .container .modal .table {
 		background: #000000;
+		overflow: auto;
+		height: 300px;
 		width: 70%;
 		padding: 20px 0;
 		z-index: 10;
@@ -532,6 +534,11 @@ input:-ms-input-placeholder {
 		width: 100%;
 		margin-right: 5px;
 		text-align: center;
+}
+.container .modal .table::-webkit-scrollbar {
+		/* webkit */
+		width: 0;
+		height: 0;
 }
 .container .container__header {
 		font-size: 35px;
