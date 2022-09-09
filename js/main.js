@@ -67,14 +67,23 @@ function choiceLevel () {
                 returnLevelGame (level, e.target.dataset.level);
                 levelEasy();
                 board.style.maxWidth ="650px";
+                setTimeout(() => {
+                    addClassModal();
+                },500);
             }else if(e.target && e.target.dataset.level === "2" ){
                 returnLevelGame (level, e.target.dataset.level);
                 levelNormal();    
                 board.style.maxWidth ="850px";
+                setTimeout(() => {
+                    addClassModal();
+                },500);
             }else {
                 returnLevelGame (level, e.target.dataset.level);
                 levelHard();
                 board.style.maxWidth ="960px";
+                setTimeout(() => {
+                    addClassModal();
+                },500);
             } 
         });  
     });
@@ -103,7 +112,7 @@ let oneCard; // первая карта которую перевернули
 let twoCard;// вторая карта которую перевернули
 let f = []; // массив куда помещяются перевернутые карты
 let g = []; // массив куда добавляются совпавшие карты
-
+let res = new Set (); // массив значений data-number совпавших карт
 // Начало игры
 function startGame() {
     start.addEventListener("click", () => {
@@ -113,6 +122,7 @@ function startGame() {
             containers[1].style.flexDirection = "row";
             containers[1].classList.remove("up");
             g = [];
+            res.clear();
             levelButton (btnsLevelCopy);
     });
 }
@@ -193,7 +203,7 @@ function flipCard(e) {
     
     
  }
- let res = new Set (); // массив значений data-number совпавших карт
+ 
  //функция перебора и добавления экслюзивных значений в массив
  function c (arr) {
     arr.forEach(item => {
@@ -386,17 +396,21 @@ modalClose ();
 //Открываем форму для ввода имени
 function modalOpen (btnOpen) {
     btnOpen.addEventListener("click", () => {
-        modalForm.classList.remove("hide");
+        addClassModal();
+    } );
+}
+modalOpen (btnOpenModal);
+
+//присваиваем класс модальному окну с формой
+function addClassModal(){
+    modalForm.classList.remove("hide");
         modalForm.classList.add("active");
         setTimeout(() => {
             form.classList.remove("hide");
             form.classList.add("active");
             btnCloseModal.style.display = "flex";
         },400);
-    } );
 }
-modalOpen (btnOpenModal);
-
 
 //Создаем список игроков
 let ul;
