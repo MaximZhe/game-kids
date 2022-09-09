@@ -545,6 +545,18 @@ input:-ms-input-placeholder {
 		color: #FFFFFF;
 		font-weight: 700;
 		text-transform: uppercase;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+}
+.container .container__header span {
+		display: block;
+		-webkit-transform: rotateY(180deg);
+		        transform: rotateY(180deg);
+		margin-right: 7px;
 }
 .container .start {
 		margin-top: 50px;
@@ -591,6 +603,8 @@ input:-ms-input-placeholder {
 		transition: 1s ease;
 		color: #6e3003;
 		background: #e13fc5;
+		-webkit-box-shadow: 0px 0px 10px 5px red;
+		        box-shadow: 0px 0px 10px 5px red;
 }
 .container .btns {
 		margin-top: 15px;
@@ -619,6 +633,10 @@ input:-ms-input-placeholder {
 		transition: 0.9s ease;
 }
 .container .btns button:hover {
+		-webkit-transform: scale(1.1);
+		        transform: scale(1.1);
+		-webkit-transition: 1s ease;
+		transition: 1s ease;
 		color: #e13fc5;
 		background: #6e3003;
 		border: 1px solid #e13fc5;

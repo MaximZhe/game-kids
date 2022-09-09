@@ -350,6 +350,13 @@ input:-ms-input-placeholder      {color: #000000;}
         color: #FFFFFF;
         font-weight: 700;
         text-transform: uppercase;
+        display: flex;
+        align-items:center;
+        span{
+            display: block;
+            transform: rotateY(180deg);
+            margin-right: 7px;
+        }
     }
     .start{
         margin-top: 50px;
@@ -377,6 +384,7 @@ input:-ms-input-placeholder      {color: #000000;}
             transition: 1s ease;
             color:#6e3003;
             background:#e13fc5;
+            box-shadow: 0px 0px 10px 5px red;
         }
         
     
@@ -399,6 +407,8 @@ input:-ms-input-placeholder      {color: #000000;}
             border: 1px solid #FFFFFF;
             transition: 0.9s ease;
             &:hover{
+                transform: scale(1.1);
+                transition: 1s ease;
                 color: #e13fc5;
                 background: #6e3003;
                 border: 1px solid #e13fc5;
