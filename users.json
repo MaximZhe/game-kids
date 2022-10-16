@@ -1,96 +1,74 @@
 {
   "users": [
     {
-      "name": "NINI",
-      "id": 1
+      "name": "rammy",
+      "id": 1,
+      "lvl": null
     },
     {
-      "name": "NINI",
-      "id": 2
+      "name": "rubby",
+      "id": 2,
+      "lvl": null
     },
     {
-      "name": "Максим",
-      "id": 3
+      "name": "poppy",
+      "id": 3,
+      "lvl": null
     },
     {
-      "name": "софья",
-      "id": 4
+      "name": "goggi",
+      "id": 4,
+      "lvl": 0
     },
     {
-      "name": "Максим Александроgвич Жуков",
-      "id": 5
+      "name": "forgy",
+      "id": 5,
+      "lvl": 1
     },
     {
-      "name": "ferrrrf",
-      "id": 6
+      "name": "coco",
+      "id": 6,
+      "lvl": 0
     },
     {
-      "name": "ruby",
-      "id": 7
+      "name": "gigio",
+      "id": 7,
+      "lvl": 0
     },
     {
-      "name": "selen",
-      "id": 8
+      "name": "nina",
+      "id": 8,
+      "lvl": 1
     },
     {
-      "name": "oscar",
-      "id": 9
+      "name": "mario",
+      "id": 9,
+      "lvl": 2
     },
     {
-      "name": "Максим",
-      "id": 10
+      "name": "jix",
+      "id": 10,
+      "lvl": 2
     },
     {
-      "name": "uuuuu",
-      "id": 11
+      "name": "fodyp",
+      "id": 11,
+      "lvl": 0
     },
     {
-      "name": "dase",
-      "id": 12
+      "name": "hloe",
+      "id": 12,
+      "lvl": 0
     },
     {
-      "name": "derf",
-      "id": 13
+      "name": "nuniez",
+      "id": 13,
+      "lvl": 0
     },
     {
-      "name": "ffff",
-      "id": 14
-    },
-    {
-      "name": "Максимdd",
-      "id": 15
-    },
-    {
-      "name": "Максим",
-      "id": 16
-    },
-    {
-      "name": "ffffsrerer",
-      "id": 17
-    },
-    {
-      "name": "robot",
-      "id": 18
-    },
-    {
-      "name": "errr",
-      "id": 19
-    },
-    {
-      "name": "adddd",
-      "id": 20
-    },
-    {
-      "name": "софья",
-      "id": 21
-    },
-    {
-      "name": "NINIw3",
-      "id": 22
-    },
-    {
-      "name": "aderfff",
-      "id": 23
+      "name": "mongo",
+      "id": 14,
+      "lvl": 0
     }
   ]
 }
