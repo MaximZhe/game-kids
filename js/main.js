@@ -359,7 +359,7 @@ userForm (form);
 let users;
 //Делаем запрос к json файлу
 function getData () {
-    fetch("http://localhost:3000/users")
+    fetch("https://raw.githubusercontent.com/MaximZhe/game-kids/main/users.json?callback=?")
     .then(response => response.json())
     .then(json => users = json)
     
